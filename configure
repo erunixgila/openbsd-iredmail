@@ -1,0 +1,61 @@
+
+SPF IREDMAIL
+v=spf1 a mx ptr ~all
+
+
+DKIM IREDMAIL
+Command Openbsd amavisd showkeys
+v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyFXk6xGD93kwbPIqKL7y4LGqxDYi2WIimZMGplmzCJVW4zdD4LoQyvTR6jmSqsOLsYlVVrYAdO/qOdHYRyvyKrlmBRyaZ+AilRlRxa6ff1nOoxxBTGUIEIqC+OjlJEF1s9AGkkLD0NzZxOozDynnKVuue5PyKiWyHl78R4yHQvwBrNDfQ9RgzZfNGpSex+0NUkXYNZ8EVwjsx5HVC8PZhBG3F7sed7P5XkOXRvRiSAfHeRV/1HAd2OBjcb76NRuRvMhMaCxsr/uhyZYeW2JxilqBVM3VYYqhYEKththCkR8QQPwHku4JSi0oD0jGR05qk10yiMHveSOo7eiZDmZrCQIDAQAB
+
+DMARC IREDMAIL
+v=DMARC1; p=reject; sp=none; adkim=s; aspf=s; rua=mailto:postmaster@links-re.com; ruf=mailto:postmaster@links-re.com
+
+INSERT forwader Iredmail
+INSERT INTO alias (address, domain, active)
+                VALUES ('testforward@links-re.com', 'links-re.com', 1);
+
+
+INSERT AKUN KE FORWADER				
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active)
+                      VALUES ('testforward@links-re.com', 'test2@links-re.com',
+                              'links-re.com', 'links-re.com',
+                              1, 1);
+							  
+DELETE FORWADER
+DELETE from alias WHERE adress = 'noc@links-re.com';
+delete from forwardings where address = "noc@links-re.com";
+
+
+
+
+
+
+INSTALL SSL 
+ cd /etc/ssl/ 
+ copy SSL ke folder tersebut disesuaikan jadi iRedMail.crt iRedMail.key
+ 
+ ==============================
+
+*** How to enable SMTPS ***
+To enable SMTPS, you should configure Postfix to listen on port 465 first, then open port 465 in iptables.
+
+Please append below lines in Postfix config file /etc/postfix/master.cf (Linux/OpenBSD) or /usr/local/etc/postfix/master.cf (FreeBSD):
+
+465     inet  n       -       n       -       -       smtpd
+  -o syslog_name=postfix/smtps
+  -o smtpd_tls_wrappermode=yes
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_client_restrictions=permit_sasl_authenticated,reject
+  -o content_filter=smtp-amavis:[127.0.0.1]:10026
+Restart Postfix service to enable SMTPS.
+
+WARNING: Please make sure you have Amavisd listening on port 10026 (and 10024, 9998).
+
+on OpenBSD
+On OpenBSD, please append service smtps in /etc/pf.conf, parameter mail_services=:
+
+# Part of file: /etc/pf.conf
+mail_services="{www, https, submission, imap, imaps, pop3, pop3s, ssh, smtps}"
+Reload PF rule file:
+
+# pfctl -f /etc/pf.conf
