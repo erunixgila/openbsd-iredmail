@@ -11,16 +11,29 @@ DMARC IREDMAIL
 v=DMARC1; p=reject; sp=none; adkim=s; aspf=s; rua=mailto:postmaster@links-re.com; ruf=mailto:postmaster@links-re.com
 
 INSERT forwader Iredmail
-INSERT INTO alias (address, domain, active)
-                VALUES ('testforward@links-re.com', 'links-re.com', 1);
+INSERT INTO alias (address, domain, active) VALUES ('support@links-re.com', 'links-re.com', 1);
+INSERT INTO alias (address, domain, active) VALUES ('claimrecovery@links-re.com', 'links-re.com', 1);
+INSERT INTO alias (address, domain, active) VALUES ('placement2@links-re.com', 'links-re.com', 1);
 
 
 INSERT AKUN KE FORWADER				
-INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active)
-                      VALUES ('testforward@links-re.com', 'test2@links-re.com',
-                              'links-re.com', 'links-re.com',
-                              1, 1);
-							  
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('support@links-re.com', 'bambangprayitno@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('support@links-re.com', 'sukatno@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('claimrecovery@links-re.com', 'mulyadi@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('claimrecovery@links-re.com', 'febriana@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('claimrecovery@links-re.com', 'ika@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('claimrecovery@links-re.com', 'fajar@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('claimrecovery@links-re.com', 'antonpermadi.sudiaman@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'harun.alrasyid@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'febriana@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'antonpermadi.sudiaman@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'aminatun.munawaroh@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'mulyadi@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'juni@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+INSERT INTO forwardings (address, forwarding, domain, dest_domain,is_list, active) VALUES ('placement2@links-re.com', 'agasi@links-re.com', 'links-re.com', 'links-re.com', 1, 1);
+
 DELETE FORWADER
 DELETE from alias WHERE adress = 'noc@links-re.com';
 delete from forwardings where address = "noc@links-re.com";
