@@ -1,0 +1,4 @@
+mkdir /home/mail
+mv /var/vmail/* /home/mail/
+rmdir /var/vmail
+ln -s /home/mail /var/vmail
